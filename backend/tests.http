@@ -1,0 +1,96 @@
+
+### EVENTS TESTING
+
+### 
+GET http://localhost:3000/api/events/ HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzQ4NjMxOTIzLCJleHAiOjE3NDg3MTgzMjN9.tsSRg4Zu-71lZa-j4FaLoH0gqDNfJE9Jp3487QlMwFY
+
+
+
+### 
+GET http://localhost:3000/api/events/ HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJob2xhQHRlc3QuY29tIiwibmFtZSI6IlRlc3QiLCJpYXQiOjE3NDg2Mzk1OTAsImV4cCI6MTc0ODY0MDQ5MH0.o0FI_mAuMOemJhbGYt8HtV7j2Ohqx92U4TSEaxyPiNE
+
+
+
+### 
+POST http://localhost:3000/api/events/ HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJob2xhQHRlc3QuY29tIiwibmFtZSI6IlRlc3QiLCJpYXQiOjE3NDg2Mzg2MjYsImV4cCI6MTc0ODYzOTUyNn0.SQU9IPzZ5rFKGe_fcxA1UEtY9h4rR1VzHAHKzCifCWo
+
+{
+    "title": "Reunión de equipo",
+    "description": "Reunión semanal",
+    "startDate": "2024-03-20T15:00:00.000Z",
+    "endDate": "2024-03-20T16:00:00.000Z"
+}
+
+### 
+POST http://localhost:3000/api/events/ HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJob2xhQHRlc3QuY29tIiwibmFtZSI6IlRlc3QiLCJpYXQiOjE3NDg2Mzg2MjYsImV4cCI6MTc0ODYzOTUyNn0.SQU9IPzZ5rFKGe_fcxA1UEtY9h4rR1VzHAHKzCifCWo
+
+{
+    "title": "Friesta cumpleaños",
+    "description": "Fiestita",
+    "startDate": "2024-03-20T20:00:00.000Z",
+    "endDate": "2024-03-20T23:00:00.000Z"
+}
+
+
+### 
+PUT http://localhost:3000/api/events/1 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJob2xhQHRlc3QuY29tIiwibmFtZSI6IlRlc3QiLCJpYXQiOjE3NDg2Mzk2ODYsImV4cCI6MTc0ODY0MDU4Nn0.-0VPQ2Ez1hVSexlHUsbqu8chwBZ8DyLlPZmUx5iYE8w
+
+{
+    "title": "Reunión de equipo",
+    "description": "Reunión semanal",
+    "startDate": "2024-03-20T12:00:00.000Z",
+    "endDate": "2024-03-20T13:00:00.000Z"
+}
+
+### 
+DELETE http://localhost:3000/api/events/2 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJob2xhQHRlc3QuY29tIiwibmFtZSI6IlRlc3QiLCJpYXQiOjE3NDg2Mzk2ODYsImV4cCI6MTc0ODY0MDU4Nn0.-0VPQ2Ez1hVSexlHUsbqu8chwBZ8DyLlPZmUx5iYE8w
+
+
+
+
+
+
+
+### SETTINGS TESTING
+
+
+
+### AUTH TESTING
+POST http://localhost:3000/api/auth/register/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "Hola@test.com",
+    "password": "Testington22!",
+    "name": "Test"
+}
+
+###
+POST http://localhost:3000/api/auth/login/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "Hola@test.com",
+    "password": "Testington22!"
+}
+
+
+###
+POST http://localhost:3000/api/auth/logout/ HTTP/1.1
+
+###
+POST http://localhost:3000/api/auth/refresh-token/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNzQ4NjM4MTI1LCJleHAiOjE3NDkyNDI5MjV9.-veI1SmqnckesxveRxOotLw4Yzjm5qRyKkZ1GG3ukio"
+}

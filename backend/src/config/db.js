@@ -10,8 +10,31 @@ const sequelize = new Sequelize(
   {
     host: process.env.DB_HOST,
     dialect: 'postgres',
-    logging: false, 
+    logging: false,
+    // Opciones adicionales para sincronización
+    pool: {
+      max: 5,
+      min: 0,
+      acquire: 30000,
+      idle: 10000
+    }
   }
 );
 
-module.exports = sequelize;
+// Función para inicializar la base de datos
+const initDatabase = async () => {
+  try {
+    await sequelize.authenticate();
+    console.log('Conexión a la base de datos establecida correctamente.');
+    
+    // Sincronizar todos los modelos
+    // force: true - Eliminará las tablas existentes y las creará de nuevo
+    // alter: true - Actualizará las tablas existentes
+    await sequelize.sync({ alter: true });
+    console.log('Base de datos sincronizada correctamente.');
+  } catch (error) {
+    console.error('Error al inicializar la base de datos:', error);
+  }
+};
+
+module.exports = { sequelize, initDatabase };

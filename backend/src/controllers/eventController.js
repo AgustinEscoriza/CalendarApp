@@ -6,11 +6,24 @@ const createEvent = async (req, res) => {
     const { title, description, startDate, endDate } = req.body;
     const userId = req.user.id;
 
+    // Validar que las fechas sean válidas
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+      return res.status(400).json({ message: 'Invalid date format' });
+    }
+
+    // Validar que la fecha de inicio sea anterior a la fecha de fin
+    if (start >= end) {
+      return res.status(400).json({ message: 'End date must be after start date' });
+    }
+
     const event = await Event.create({
       title,
       description,
-      startDate,
-      endDate,
+      startDate: start,
+      endDate: end,
       userId,
     });
 
@@ -55,6 +68,19 @@ const updateEvent = async (req, res) => {
     const userId = req.user.id;
     const { title, description, startDate, endDate } = req.body;
 
+    // Validar que las fechas sean válidas
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+
+    if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+      return res.status(400).json({ message: 'Invalid date format' });
+    }
+
+    // Validar que la fecha de inicio sea anterior a la fecha de fin
+    if (start >= end) {
+      return res.status(400).json({ message: 'End date must be after start date' });
+    }
+
     const event = await Event.findOne({ where: { id, userId } });
     if (!event) {
       return res.status(404).json({ message: 'Event not found' });
@@ -63,8 +89,8 @@ const updateEvent = async (req, res) => {
     await event.update({
       title,
       description,
-      startDate,
-      endDate,
+      startDate: start,
+      endDate: end,
     });
 
     res.json(event);
