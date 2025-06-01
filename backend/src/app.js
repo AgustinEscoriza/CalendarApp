@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const { initDatabase } = require('./config/db');
+const { i18next, i18nextMiddleware, getUserLanguage } = require('./config/i18n');
+const { swaggerUi, specs } = require('./config/swagger');
 
 // Cargar variables de entorno
 dotenv.config();
@@ -17,6 +19,14 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use(i18nextMiddleware.handle(i18next));
+app.use(getUserLanguage);
+
+// Documentación Swagger
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, {
+  customCss: '.swagger-ui .topbar { display: none }',
+  customSiteTitle: 'Calendar API Documentation'
+}));
 
 // Rutas
 app.use('/api/auth', authRoutes);

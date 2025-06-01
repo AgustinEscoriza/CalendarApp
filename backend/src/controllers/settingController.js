@@ -17,7 +17,7 @@ const createSetting = async (req, res) => {
 
     res.status(201).json(setting);
   } catch (error) {
-    res.status(500).json({ message: 'Error creating setting' });
+    res.status(500).json({ message: req.t('error.creating_setting') });
   }
 };
 
@@ -28,7 +28,7 @@ const getAllSettings = async (req, res) => {
     const settings = await Setting.findAll({ where: { userId } });
     res.json(settings);
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching settings' });
+    res.status(500).json({ message: req.t('error.fetching_settings') });
   }
 };
 
@@ -40,12 +40,12 @@ const getSettingById = async (req, res) => {
 
     const setting = await Setting.findOne({ where: { id, userId } });
     if (!setting) {
-      return res.status(404).json({ message: 'Setting not found' });
+      return res.status(404).json({ message: req.t('error.setting_not_found') });
     }
 
     res.json(setting);
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching setting' });
+    res.status(500).json({ message: req.t('error.fetching_setting') });
   }
 };
 
@@ -58,7 +58,7 @@ const updateSetting = async (req, res) => {
 
     const setting = await Setting.findOne({ where: { id, userId } });
     if (!setting) {
-      return res.status(404).json({ message: 'Setting not found' });
+      return res.status(404).json({ message: req.t('error.setting_not_found') });
     }
 
     await setting.update({
@@ -71,7 +71,7 @@ const updateSetting = async (req, res) => {
 
     res.json(setting);
   } catch (error) {
-    res.status(500).json({ message: 'Error updating setting' });
+    res.status(500).json({ message: req.t('error.updating_setting') });
   }
 };
 
@@ -83,13 +83,13 @@ const deleteSetting = async (req, res) => {
 
     const setting = await Setting.findOne({ where: { id, userId } });
     if (!setting) {
-      return res.status(404).json({ message: 'Setting not found' });
+      return res.status(404).json({ message: req.t('error.setting_not_found') });
     }
 
     await setting.destroy();
-    res.json({ message: 'Setting deleted successfully' });
+    res.json({ message: req.t('success.setting_deleted') });
   } catch (error) {
-    res.status(500).json({ message: 'Error deleting setting' });
+    res.status(500).json({ message: req.t('error.deleting_setting') });
   }
 };
 

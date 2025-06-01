@@ -11,12 +11,12 @@ const createEvent = async (req, res) => {
     const end = new Date(endDate);
 
     if (isNaN(start.getTime()) || isNaN(end.getTime())) {
-      return res.status(400).json({ message: 'Invalid date format' });
+      return res.status(400).json({ message: req.t('error.invalid_date_format') });
     }
 
     // Validar que la fecha de inicio sea anterior a la fecha de fin
     if (start >= end) {
-      return res.status(400).json({ message: 'End date must be after start date' });
+      return res.status(400).json({ message: req.t('error.end_date_before_start') });
     }
 
     const event = await Event.create({
@@ -29,7 +29,7 @@ const createEvent = async (req, res) => {
 
     res.status(201).json(event);
   } catch (error) {
-    res.status(500).json({ message: 'Error creating event' });
+    res.status(500).json({ message: req.t('error.creating_event') });
   }
 };
 
@@ -40,7 +40,7 @@ const getAllEvents = async (req, res) => {
     const events = await Event.findAll({ where: { userId } });
     res.json(events);
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching events' });
+    res.status(500).json({ message: req.t('error.fetching_events') });
   }
 };
 
@@ -52,12 +52,12 @@ const getEventById = async (req, res) => {
 
     const event = await Event.findOne({ where: { id, userId } });
     if (!event) {
-      return res.status(404).json({ message: 'Event not found' });
+      return res.status(404).json({ message: req.t('error.event_not_found') });
     }
 
     res.json(event);
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching event' });
+    res.status(500).json({ message: req.t('error.fetching_event') });
   }
 };
 
@@ -73,17 +73,17 @@ const updateEvent = async (req, res) => {
     const end = new Date(endDate);
 
     if (isNaN(start.getTime()) || isNaN(end.getTime())) {
-      return res.status(400).json({ message: 'Invalid date format' });
+      return res.status(400).json({ message: req.t('error.invalid_date_format') });
     }
 
     // Validar que la fecha de inicio sea anterior a la fecha de fin
     if (start >= end) {
-      return res.status(400).json({ message: 'End date must be after start date' });
+      return res.status(400).json({ message: req.t('error.end_date_before_start') });
     }
 
     const event = await Event.findOne({ where: { id, userId } });
     if (!event) {
-      return res.status(404).json({ message: 'Event not found' });
+      return res.status(404).json({ message: req.t('error.event_not_found') });
     }
 
     await event.update({
@@ -95,7 +95,7 @@ const updateEvent = async (req, res) => {
 
     res.json(event);
   } catch (error) {
-    res.status(500).json({ message: 'Error updating event' });
+    res.status(500).json({ message: req.t('error.updating_event') });
   }
 };
 
@@ -107,13 +107,13 @@ const deleteEvent = async (req, res) => {
 
     const event = await Event.findOne({ where: { id, userId } });
     if (!event) {
-      return res.status(404).json({ message: 'Event not found' });
+      return res.status(404).json({ message: req.t('error.event_not_found') });
     }
 
     await event.destroy();
-    res.json({ message: 'Event deleted successfully' });
+    res.json({ message: req.t('success.event_deleted') });
   } catch (error) {
-    res.status(500).json({ message: 'Error deleting event' });
+    res.status(500).json({ message: req.t('error.deleting_event') });
   }
 };
 
