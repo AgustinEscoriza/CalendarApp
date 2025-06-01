@@ -1,0 +1,19 @@
+{
+    "login": {
+      "title": "Iniciar sesión",
+      "email": "Email",
+      "password": "Contraseña",
+      "button": "Entrar",
+      "error": "Error al iniciar sesión",
+      "success": "¡Bienvenido!"
+    },
+    "signup": {
+      "title": "Crear cuenta",
+      "name": "Nombre",
+      "email": "Email",
+      "password": "Contraseña",
+      "button": "Registrarse",
+      "error": "Error en el registro",
+      "success": "Registro exitoso"
+    }
+  }
