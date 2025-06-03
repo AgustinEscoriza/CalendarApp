@@ -5,7 +5,11 @@
       "password": "Password",
       "button": "Login",
       "error": "Authentication error",
-      "success": "Welcome!"
+      "success": "Welcome!",
+      "emailPlaceholder": "Enter your email",
+      "passwordPlaceholder": "Enter your password",
+      "noAccount": "Don't have an account?",
+      "signupLink": "Sign up"
     },
     "signup": {
       "title": "Create Account",
@@ -14,6 +18,105 @@
       "password": "Password",
       "button": "Sign Up",
       "error": "Registration error",
-      "success": "Registration successful"
+      "success": "Registration successful. Please sign in to continue!",
+      "namePlaceholder": "Enter your full name",
+      "emailPlaceholder": "Enter your email",
+      "passwordPlaceholder": "Enter your password",
+      "invalidEmail": "Please enter a valid email address",
+      "hasAccount": "Already have an account?",
+      "loginLink": "Sign in"
+    },
+    "calendar": {
+      "upcomingEvents": "Upcoming Events",
+      "today": "TODAY",
+      "navigation": {
+        "today": "Today",
+        "previous": "←",
+        "next": "→"
+      },
+      "views": {
+        "month": "Month",
+        "week": "Week",
+        "day": "Day"
+      },
+      "weekdays": {
+        "short": ["M", "T", "W", "T", "F", "S", "S"],
+        "long": ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
+      },
+      "months": {
+        "names": ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]
+      },
+      "errors": {
+        "loadEvents": "Error loading events",
+        "saveEvent": "Error saving event",
+        "deleteEvent": "Error deleting event",
+        "moveEvent": "Error moving event",
+        "resizeEvent": "Error resizing event"
+      }
+    },
+    "event": {
+      "title": "Event",
+      "createTitle": "Create Event",
+      "editTitle": "Edit Event",
+      "form": {
+        "title": "Title",
+        "description": "Description",
+        "startDate": "Start Date",
+        "endDate": "End Date",
+        "titlePlaceholder": "Event title",
+        "descriptionPlaceholder": "Event description",
+        "startDatePlaceholder": "Select start date",
+        "endDatePlaceholder": "Select end date"
+      },
+      "buttons": {
+        "create": "Create",
+        "update": "Update",
+        "delete": "Delete",
+        "cancel": "Cancel"
+      },
+      "validation": {
+        "titleRequired": "Title is required",
+        "titleMinLength": "Title must have at least 3 characters",
+        "startDateRequired": "Start date is required",
+        "endDateRequired": "End date is required",
+        "endDateAfterStart": "End date must be after start date",
+        "maxDuration": "Event cannot last more than 24 hours",
+        "formErrors": "Please correct the errors in the form",
+        "processError": "Error processing event"
+      },
+      "dateFormat": "MM/dd/yyyy HH:mm"
+    },
+    "settings": {
+      "title": "Settings",
+      "language": "Language",
+      "timezone": "Timezone",
+      "location": "Current Location",
+      "timeFormat": "Time Format",
+      "darkMode": "Dark Mode",
+      "save": "Save Changes",
+      "cancel": "Cancel",
+      "saveSuccess": "Settings saved successfully",
+      "saveError": "Error saving settings",
+      "languageSpanish": "Español",
+      "languageEnglish": "English",
+      "languagePlaceholder": "Select a language",
+      "timezonePlaceholder": "Select your timezone",
+      "locationPlaceholder": "e.g: Buenos Aires, Argentina",
+      "timeFormatPlaceholder": "Select time format",
+      "timeFormat24": "24 hours (14:30)",
+      "timeFormat12": "12 hours (2:30 PM)",
+      "darkModeOn": "Enabled",
+      "darkModeOff": "Disabled",
+      "timezones": {
+        "buenosAires": "Buenos Aires (GMT-3)",
+        "saoPaulo": "São Paulo (GMT-3)",
+        "newYork": "New York (GMT-5)",
+        "losAngeles": "Los Angeles (GMT-8)",
+        "london": "London (GMT+0)",
+        "paris": "Paris (GMT+1)",
+        "madrid": "Madrid (GMT+1)",
+        "tokyo": "Tokyo (GMT+9)",
+        "sydney": "Sydney (GMT+10)"
+      }
     }
-  }
+}

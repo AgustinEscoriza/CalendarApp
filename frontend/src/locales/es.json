@@ -5,7 +5,11 @@
       "password": "Contraseña",
       "button": "Entrar",
       "error": "Error al iniciar sesión",
-      "success": "¡Bienvenido!"
+      "success": "¡Bienvenido!",
+      "emailPlaceholder": "Ingresa tu email",
+      "passwordPlaceholder": "Ingresa tu contraseña",
+      "noAccount": "¿No tienes cuenta?",
+      "signupLink": "Regístrate"
     },
     "signup": {
       "title": "Crear cuenta",
@@ -14,6 +18,105 @@
       "password": "Contraseña",
       "button": "Registrarse",
       "error": "Error en el registro",
-      "success": "Registro exitoso"
+      "success": "Registro exitoso. ¡Inicia sesión para continuar!",
+      "namePlaceholder": "Ingresa tu nombre completo",
+      "emailPlaceholder": "Ingresa tu email",
+      "passwordPlaceholder": "Ingresa tu contraseña",
+      "invalidEmail": "Por favor ingrese un email válido",
+      "hasAccount": "¿Ya tienes cuenta?",
+      "loginLink": "Inicia sesión"
+    },
+    "calendar": {
+      "upcomingEvents": "Próximos Eventos",
+      "today": "HOY",
+      "navigation": {
+        "today": "Hoy",
+        "previous": "←",
+        "next": "→"
+      },
+      "views": {
+        "month": "Mes",
+        "week": "Semana",
+        "day": "Día"
+      },
+      "weekdays": {
+        "short": ["L", "M", "M", "J", "V", "S", "D"],
+        "long": ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"]
+      },
+      "months": {
+        "names": ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
+      },
+      "errors": {
+        "loadEvents": "Error al cargar eventos",
+        "saveEvent": "Error al guardar evento",
+        "deleteEvent": "Error al eliminar evento",
+        "moveEvent": "Error al mover evento",
+        "resizeEvent": "Error al redimensionar evento"
+      }
+    },
+    "event": {
+      "title": "Evento",
+      "createTitle": "Crear Evento",
+      "editTitle": "Editar Evento",
+      "form": {
+        "title": "Título",
+        "description": "Descripción",
+        "startDate": "Fecha de inicio",
+        "endDate": "Fecha de fin",
+        "titlePlaceholder": "Título del evento",
+        "descriptionPlaceholder": "Descripción del evento",
+        "startDatePlaceholder": "Seleccionar fecha de inicio",
+        "endDatePlaceholder": "Seleccionar fecha de fin"
+      },
+      "buttons": {
+        "create": "Crear",
+        "update": "Actualizar",
+        "delete": "Eliminar",
+        "cancel": "Cancelar"
+      },
+      "validation": {
+        "titleRequired": "El título es requerido",
+        "titleMinLength": "El título debe tener al menos 3 caracteres",
+        "startDateRequired": "La fecha de inicio es requerida",
+        "endDateRequired": "La fecha de fin es requerida",
+        "endDateAfterStart": "La fecha de fin debe ser posterior a la fecha de inicio",
+        "maxDuration": "El evento no puede durar más de 24 horas",
+        "formErrors": "Por favor corrige los errores en el formulario",
+        "processError": "Error al procesar el evento"
+      },
+      "dateFormat": "dd/MM/yyyy HH:mm"
+    },
+    "settings": {
+      "title": "Configuraciones",
+      "language": "Idioma",
+      "timezone": "Zona Horaria",
+      "location": "Ubicación Actual",
+      "timeFormat": "Formato de Hora",
+      "darkMode": "Modo Oscuro",
+      "save": "Guardar Cambios",
+      "cancel": "Cancelar",
+      "saveSuccess": "Configuraciones guardadas exitosamente",
+      "saveError": "Error al guardar configuraciones",
+      "languageSpanish": "Español",
+      "languageEnglish": "English",
+      "languagePlaceholder": "Selecciona un idioma",
+      "timezonePlaceholder": "Selecciona tu zona horaria",
+      "locationPlaceholder": "Ej: Buenos Aires, Argentina",
+      "timeFormatPlaceholder": "Selecciona el formato de hora",
+      "timeFormat24": "24 horas (14:30)",
+      "timeFormat12": "12 horas (2:30 PM)",
+      "darkModeOn": "Activado",
+      "darkModeOff": "Desactivado",
+      "timezones": {
+        "buenosAires": "Buenos Aires (GMT-3)",
+        "saoPaulo": "São Paulo (GMT-3)",
+        "newYork": "New York (GMT-5)",
+        "losAngeles": "Los Angeles (GMT-8)",
+        "london": "London (GMT+0)",
+        "paris": "Paris (GMT+1)",
+        "madrid": "Madrid (GMT+1)",
+        "tokyo": "Tokyo (GMT+9)",
+        "sydney": "Sydney (GMT+10)"
+      }
     }
-  }
+}
