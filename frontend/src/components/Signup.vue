@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useAuthStore } from '../store/auth'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
@@ -13,20 +13,36 @@ const { t, locale } = useI18n()
 const router = useRouter()
 const message = useMessage()
 
+// Expresión regular para validación de email
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+const nameError = computed(() => {
+  if (!auth.error?.errors) return null
+  return auth.error.errors.find(err => err.path === 'name')?.msg
+})
+
+const emailError = computed(() => {
+  if (!auth.error?.errors) return null
+  return auth.error.errors.find(err => err.path === 'email')?.msg
+})
+
+const passwordError = computed(() => {
+  if (!auth.error?.errors) return null
+  return auth.error.errors.find(err => err.path === 'password')?.msg
+})
+
 const onSubmit = async () => {
+  if (!emailRegex.test(email.value)) {
+    message.error(t('signup.invalidEmail'))
+    return
+  }
+
   try {
     await auth.signup(name.value, email.value, password.value)
-    // Dependiendo del backend: si el registro loguea automáticamente, redirigir a /. 
-    // Si requiere login manual, redirigir a /login y mostrar mensaje de éxito.
-    message.success(t('signup.success') || 'Registro exitoso. ¡Inicia sesión para continuar!')
-    router.push('/login') // Asumo que se necesita login manual después del registro
+    message.success(t('signup.success'))
+    router.push('/login')
   } catch (err) {
-    // El manejo de errores ya está en el store y se mostrará en los NFormItem
-    console.error('Error during signup:', err);
-    if (!auth.error || !auth.error.message) {
-        // Si no hay un error específico del backend, mostrar un mensaje genérico
-        message.error(t('signup.error') || 'Error en el registro.');
-    }
+    console.error('Error durante el registro:', err)
   }
 }
 
@@ -39,41 +55,54 @@ const langOptions = [
 <template>
   <div class="login-bg">
     <n-card style="width: 350px; padding: 2em;">
-      <div style="display: flex; justify-content: flex-end; margin-bottom: 1em;">
-        <n-select v-model:value="locale" :options="langOptions" size="small" style="width: 120px;" />
-      </div>
       <n-form @submit.prevent="onSubmit">
         <h2 style="text-align:center; margin-bottom: 1em;">{{ t('signup.title') }}</h2>
-         <n-form-item
+        <n-form-item
           :label="t('signup.name')"
-          :validation-status="auth.error && auth.error.field === 'name' ? 'error' : undefined"
-          :feedback="auth.error && auth.error.field === 'name' ? auth.error.message : undefined"
+          :validation-status="nameError ? 'error' : undefined"
+          :feedback="nameError"
         >
-          <n-input v-model:value="name" type="text" placeholder="Nombre" required />
+          <n-input 
+            v-model:value="name" 
+            type="text" 
+            :placeholder="t('signup.namePlaceholder')" 
+            required 
+          />
         </n-form-item>
         <n-form-item
           :label="t('signup.email')"
-          :validation-status="auth.error && auth.error.field === 'email' ? 'error' : undefined"
-          :feedback="auth.error && auth.error.field === 'email' ? auth.error.message : undefined"
+          :validation-status="emailError ? 'error' : undefined"
+          :feedback="emailError"
         >
-          <n-input v-model:value="email" type="email" placeholder="Email" required />
+          <n-input 
+            v-model:value="email" 
+            type="email" 
+            :placeholder="t('signup.emailPlaceholder')" 
+            required 
+          />
         </n-form-item>
         <n-form-item
           :label="t('signup.password')"
-          :validation-status="auth.error && auth.error.field === 'password' ? 'error' ? 'error' : undefined : undefined"
-          :feedback="auth.error && auth.error.field === 'password' ? auth.error.message : undefined"
+          :validation-status="passwordError ? 'error' : undefined"
+          :feedback="passwordError"
         >
-          <n-input v-model:value="password" type="password" placeholder="******" required />
+          <n-input 
+            v-model:value="password" 
+            type="password" 
+            :placeholder="t('signup.passwordPlaceholder')" 
+            required 
+          />
         </n-form-item>
         <n-button type="primary" block :loading="auth.loading" attr-type="submit">
           {{ t('signup.button') }}
         </n-button>
-        <!-- Display generic error message if no specific field is provided -->
-        <div v-if="auth.error && !auth.error.field" style="color: #d32f2f; margin-top: 1em; text-align:center;">
+        <!-- Error genérico -->
+        <div v-if="auth.error && !auth.error.errors" style="color: #d32f2f; margin-top: 1em; text-align:center;">
           {{ auth.error.message }}
         </div>
-         <div style="text-align: center; margin-top: 1em;">
-            ¿Ya tienes cuenta? <router-link to="/login">Inicia sesión</router-link>
+        <!-- Enlace de login -->
+        <div style="text-align: center; margin-top: 1em;">
+          {{ t('signup.hasAccount') }} <router-link to="/login">{{ t('signup.loginLink') }}</router-link>
         </div>
       </n-form>
     </n-card>
