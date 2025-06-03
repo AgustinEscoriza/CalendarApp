@@ -270,11 +270,18 @@ watch(() => props.selectedDate, (newDate) => {
 })
 
 const groupedEvents = computed(() => {
-  const events = [...props.todayEvents, ...props.upcomingEvents]
+  const allEvents = [...props.todayEvents, ...props.upcomingEvents]
+  const uniqueEvents = allEvents.reduce((acc, event) => {
+    if (!acc.find(e => e.id === event.id)) {
+      acc.push(event)
+    }
+    return acc
+  }, [])
+  
   const grouped = {}
   const today = new Date()
 
-  events.forEach(event => {
+  uniqueEvents.forEach(event => {
     const eventDate = new Date(event.start)
     const dateKey = eventDate.toDateString()
     
