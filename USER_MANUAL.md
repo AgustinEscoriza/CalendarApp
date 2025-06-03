@@ -7,13 +7,13 @@ Una guía completa para usar CalendarApp.
 
 ## 📋 Tabla de Contenidos
 
-1. [Introducción](#📝-introducción)
-2. [Primeros Pasos](#🚀-primeros-pasos)
-3. [Interfaz Principal](#🖥️-interfaz-principal)
-4. [Gestión de Eventos](#📅-gestión-de-eventos)
-5. [Navegación del Calendario](#🧭-navegación-del-calendario)
-6. [Configuraciones](#⚙️-configuraciones)
-7. [Funciones Especiales](#✨-funciones-especiales)
+1. [Introducción](#-introducción)
+2. [Primeros Pasos](#-primeros-pasos)
+3. [Interfaz Principal](#-interfaz-principal)
+4. [Gestión de Eventos](#-gestión-de-eventos)
+5. [Navegación del Calendario](#-navegación-del-calendario)
+6. [Configuraciones](#-configuraciones)
+7. [Funciones Especiales](#-funciones-especiales)
 
 ---
 
