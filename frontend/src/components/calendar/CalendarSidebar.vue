@@ -53,7 +53,7 @@
     </n-card>
 
     <!-- Events grouped by day -->
-    <n-card v-if="groupedEvents.length > 0" class="events-card grouped-events-card" size="small">
+    <n-card v-if="groupedEvents.length > 0" class="events-card" size="small">
       <template #header>
         <div class="events-header">
           <n-icon class="events-icon">
@@ -325,6 +325,7 @@ const selectEvent = (event) => {
   height: 100%;
   overflow: hidden;
   min-height: 0;
+  padding-bottom: 8px; /* Espacio en la parte inferior */
 }
 
 .calendar-header {
@@ -388,8 +389,10 @@ const selectEvent = (event) => {
 .events-card {
   flex: 1;
   min-height: 0;
+  max-height: calc(100vh - 320px); /* Limitar altura máxima */
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .events-card :deep(.n-card__content) {
@@ -398,10 +401,12 @@ const selectEvent = (event) => {
   display: flex;
   flex-direction: column;
   padding: 0 !important;
+  overflow: hidden;
 }
 
 .events-card :deep(.n-card__header) {
   padding-left: 0 !important;
+  flex-shrink: 0;
 }
 
 .events-card :deep(.n-scrollbar) {
@@ -421,22 +426,20 @@ const selectEvent = (event) => {
 }
 
 .upcoming-events-card {
-  flex: 2;
-  min-height: 250px;
-}
-
-.upcoming-events-card :deep(.n-scrollbar) {
-  max-height: 400px !important;
+  flex: 1;
+  min-height: 0;
 }
 
 .events-scroll-container {
-  max-height: calc(40vh - 100px);
-  min-height: 200px;
+  flex: 1;
+  min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
   padding: 16px;
+  padding-bottom: 24px;
   margin: -16px;
   margin-left: -16px;
+  margin-bottom: -8px;
   padding-right: 8px;
 }
 
@@ -478,15 +481,6 @@ const selectEvent = (event) => {
   .mini-calendar-card {
     flex-shrink: 1;
   }
-  
-  .events-card :deep(.n-scrollbar) {
-    max-height: 150px !important;
-  }
-}
-
-.grouped-events-card {
-  flex: 2;
-  min-height: 300px;
 }
 
 .day-group {
@@ -497,8 +491,8 @@ const selectEvent = (event) => {
 
 .day-group:last-child {
   border-bottom: none;
-  margin-bottom: 0;
-  padding-bottom: 0;
+  margin-bottom: 16px; /* Mantener margen en el último elemento */
+  padding-bottom: 8px; /* Menos padding en el último */
 }
 
 .day-header-section {

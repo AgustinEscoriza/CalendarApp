@@ -199,8 +199,8 @@ const calendarOptions = computed(() => ({
   nowIndicator: true,
   businessHours: {
     daysOfWeek: [1, 2, 3, 4, 5], // Lunes a viernes
-    startTime: '08:00',
-    endTime: '18:00',
+    startTime: '00:00',
+    endTime: '23:00',
   },
   scrollTime: '08:00:00',
   scrollTimeReset: false
@@ -485,6 +485,7 @@ watch(
   display: flex;
   flex-direction: column;
   background-color: v-bind('themeVars.bodyColor');
+  overflow: hidden;
 }
 
 .calendar-header {
@@ -520,10 +521,12 @@ watch(
 }
 
 .calendar-main {
+  flex: 1;
   display: grid;
   grid-template-columns: 280px 1fr;
   overflow: hidden;
   gap: 0;
+  min-height: 0;
 }
 
 .calendar-sidebar {
@@ -535,16 +538,23 @@ watch(
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
+  height: 100%;
 }
 
 .calendar-content {
-  flex: 1;
   background: v-bind('themeVars.cardColor');
-  overflow: auto;
-  min-height: 0;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  position: relative;
 }
 
 :deep(.fc) {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+:deep(.fc-view-harness) {
   height: 100% !important;
 }
 
