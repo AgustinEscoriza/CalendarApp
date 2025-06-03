@@ -15,7 +15,7 @@ const message = useMessage()
 const onSubmit = async () => {
   await auth.login(email.value, password.value)
   if (auth.accessToken && !auth.error) {
-    message.success(t('login.success') || '¡Bienvenido!')
+    message.success(t('login.success'))
     router.push('/')
   }
 }
@@ -29,9 +29,6 @@ const langOptions = [
 <template>
   <div class="login-bg">
     <n-card style="width: 350px; padding: 2em;">
-      <div style="display: flex; justify-content: flex-end; margin-bottom: 1em;">
-        <n-select v-model:value="locale" :options="langOptions" size="small" style="width: 120px;" />
-      </div>
       <n-form @submit.prevent="onSubmit">
         <h2 style="text-align:center; margin-bottom: 1em;">{{ t('login.title') }}</h2>
         <n-form-item
@@ -39,24 +36,35 @@ const langOptions = [
           :validation-status="auth.error && auth.error.field === 'email' ? 'error' : undefined"
           :feedback="auth.error && auth.error.field === 'email' ? auth.error.message : undefined"
         >
-          <n-input v-model:value="email" type="email" placeholder="Email" required />
+          <n-input 
+            v-model:value="email" 
+            type="email" 
+            :placeholder="t('login.emailPlaceholder')" 
+            required 
+          />
         </n-form-item>
         <n-form-item
           :label="t('login.password')"
           :validation-status="auth.error && auth.error.field === 'password' ? 'error' : undefined"
           :feedback="auth.error && auth.error.field === 'password' ? auth.error.message : undefined"
         >
-          <n-input v-model:value="password" type="password" placeholder="******" required />
+          <n-input 
+            v-model:value="password" 
+            type="password" 
+            :placeholder="t('login.passwordPlaceholder')" 
+            required 
+          />
         </n-form-item>
         <n-button type="primary" block :loading="auth.loading" attr-type="submit">
           {{ t('login.button') }}
         </n-button>
-        <!-- Si no matchea nigun field vamos con error generico -->
+        <!-- Error genérico -->
         <div v-if="auth.error && !auth.error.field" style="color: #d32f2f; margin-top: 1em; text-align:center;">
           {{ auth.error.message || t('login.error') }}
         </div>
-         <div style="text-align: center; margin-top: 1em;">
-            ¿No tienes cuenta? <router-link to="/signup">Regístrate</router-link>
+        <!-- Enlace de registro -->
+        <div style="text-align: center; margin-top: 1em;">
+          {{ t('login.noAccount') }} <router-link to="/signup">{{ t('login.signupLink') }}</router-link>
         </div>
       </n-form>
     </n-card>
