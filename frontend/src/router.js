@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthStore } from './store/auth'
 import Login from './components/Login.vue'
 import Signup from './components/Signup.vue'
-import CalendarEvents from './components/CalendarEvents.vue'
+import CalendarView from './views/CalendarView.vue'
 
 const routes = [
   {
@@ -20,7 +20,7 @@ const routes = [
   {
     path: '/',
     name: 'Calendar',
-    component: CalendarEvents,
+    component: CalendarView,
     meta: { requiresAuth: true },
   },
 ]
