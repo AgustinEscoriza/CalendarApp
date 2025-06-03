@@ -1,7 +1,7 @@
 import { ref, computed } from 'vue'
 import { useSettingsStore } from '../store/settings'
 
-const OPENWEATHER_API_KEY = 'TU_API_KEY_AQUI' // Obtener de https://openweathermap.org/api
+const OPENWEATHER_API_KEY = 'TU_API_KEY_AQUI' // Obtener de https://home.openweathermap.org/api_keys
 const BASE_URL = 'https://api.openweathermap.org/data/2.5'
 
 export const useWeather = () => {

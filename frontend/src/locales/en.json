@@ -84,6 +84,13 @@
         "formErrors": "Please correct the errors in the form",
         "processError": "Error processing event"
       },
+      "weather": {
+        "title": "Weather Forecast",
+        "humidity": "Humidity",
+        "wind": "Wind",
+        "loading": "Loading weather...",
+        "unavailable": "Weather unavailable"
+      },
       "dateFormat": "MM/dd/yyyy HH:mm"
     },
     "settings": {

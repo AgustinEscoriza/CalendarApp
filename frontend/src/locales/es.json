@@ -84,6 +84,13 @@
         "formErrors": "Por favor corrige los errores en el formulario",
         "processError": "Error al procesar el evento"
       },
+      "weather": {
+        "title": "Pronóstico del Clima",
+        "humidity": "Humedad",
+        "wind": "Viento",
+        "loading": "Cargando clima...",
+        "unavailable": "Clima no disponible"
+      },
       "dateFormat": "dd/MM/yyyy HH:mm"
     },
     "settings": {

@@ -85,7 +85,20 @@
             >
               <n-thing>
                 <template #header>
-                  <n-text style="font-size: 14px; line-height: 1.3;">{{ event.title }}</n-text>
+                  <div class="event-header">
+                    <n-text style="font-size: 14px; line-height: 1.3;">{{ event.title }}</n-text>
+                    <!-- Weather Info -->
+                    <div v-if="eventWeather[event.id]" class="event-weather">
+                      <img 
+                        :src="getWeatherIconUrl(eventWeather[event.id].icon)" 
+                        :alt="eventWeather[event.id].description"
+                        class="weather-icon"
+                      />
+                      <n-text style="font-size: 13px; font-weight: 600;">
+                        {{ eventWeather[event.id].temp }}°
+                      </n-text>
+                    </div>
+                  </div>
                 </template>
                 <template #description>
                   <n-text depth="3" style="font-size: 12px;">
@@ -104,11 +117,12 @@
 
 <script setup>
 import '../../styles/calendar-sidebar.css'
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import { ChevronBack, ChevronForward, Time, Calendar } from '@vicons/ionicons5'
 import { useThemeVars } from 'naive-ui'
 import { useI18n } from 'vue-i18n'
 import { useSettingsStore } from '../../store/settings'
+import { useWeather } from '../../services/useWeather'
 
 const props = defineProps({
   selectedDate: Date,
@@ -121,8 +135,10 @@ const emit = defineEmits(['date-select', 'event-select'])
 // Composables
 const { t, locale } = useI18n()
 const settingsStore = useSettingsStore()
+const { getWeatherForDate, getWeatherIconUrl } = useWeather()
 
 const currentDate = ref(new Date())
+const eventWeather = ref({})
 
 // Agregar las variables de tema
 const themeVars = useThemeVars()
@@ -225,7 +241,7 @@ const isSameDay = (date1, date2) => {
 }
 
 const hasEventsOnDate = (date) => {
-  return [...props.todayEvents, ...props.upcomingEvents].some(event => 
+  return [...(props.todayEvents || []), ...(props.upcomingEvents || [])].some(event => 
     isSameDay(new Date(event.start), date)
   )
 }
@@ -270,7 +286,7 @@ watch(() => props.selectedDate, (newDate) => {
 })
 
 const groupedEvents = computed(() => {
-  const allEvents = [...props.todayEvents, ...props.upcomingEvents]
+  const allEvents = [...(props.todayEvents || []), ...(props.upcomingEvents || [])]
   const uniqueEvents = allEvents.reduce((acc, event) => {
     if (!acc.find(e => e.id === event.id)) {
       acc.push(event)
@@ -319,6 +335,31 @@ const groupedEvents = computed(() => {
 const selectEvent = (event) => {
   emit('event-select', event)
 }
+
+// Función para cargar clima de los eventos
+const loadEventWeather = async () => {
+  const allEvents = [...(props.todayEvents || []), ...(props.upcomingEvents || [])]
+  
+  // Limpiar clima anterior
+  eventWeather.value = {}
+  
+  for (const event of allEvents) {
+    try {
+      const eventDate = new Date(event.start)
+      const weather = await getWeatherForDate(eventDate)
+      eventWeather.value[event.id] = weather
+    } catch (error) {
+      console.error(`Error loading weather for event ${event.id}:`, error)
+    }
+  }
+}
+
+// Cargar clima cuando cambian los eventos
+watch([() => props.todayEvents, () => props.upcomingEvents], loadEventWeather, { immediate: true })
+
+onMounted(() => {
+  loadEventWeather()
+})
 </script>
 
 <style scoped>
@@ -389,5 +430,26 @@ const selectEvent = (event) => {
   --n-border: 1px solid var(--app-green) !important;
   --n-border-hover: 1px solid var(--app-green-hover) !important;
   --n-border-pressed: 1px solid var(--app-green-dark) !important;
+}
+
+/* Weather styles */
+.event-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.event-weather {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.weather-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
 </style> 
