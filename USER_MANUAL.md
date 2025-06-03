@@ -1,7 +1,7 @@
 
 # 📖 Manual de Usuario - CalendarApp
 
-Una guía completa para usar tu aplicación de calendario moderna.
+Una guía completa para usar CalendarApp.
 
 ---
 
