@@ -21,7 +21,7 @@ export const DATE_FORMATS = {
  * @returns {Date|null} - Objeto Date válido o null si es inválido
  */
 export const toDate = (input) => {
-  if (!input) return null
+  if (input === null || input === undefined) return null
   
   if (input instanceof Date) {
     return isNaN(input.getTime()) ? null : input
