@@ -2,6 +2,13 @@
 
 Una aplicación de calendario moderna construida con Vue.js 3 en el frontend y Node.js/Express en el backend.
 
+## 📋 Documentación
+
+- **[Manual de Usuario](USER_MANUAL.md)** - Guía completa para usar la aplicación
+- **[Guía para Desarrolladores](RUN_PROJECT_GUIDE.md)** - Configuración e instalación del proyecto
+
+---
+
 ## 🏗️ Arquitectura
 
 ### Frontend
@@ -42,7 +49,7 @@ Una aplicación de calendario moderna construida con Vue.js 3 en el frontend y N
    ```
 
 3. **Configurar variables de entorno:**
-   Crear un archivo `.env` en la carpeta `backend/` con el siguiente contenido:
+   Crear un archivo `.env` en la carpeta `backend/` con el siguiente contenido, aca y en el codigo hay un .env.example de ejemplo:
    ```env
    # Database
    DB_NAME=calendar_app
@@ -119,7 +126,7 @@ El frontend estará ejecutándose en `http://localhost:5173` (puerto por defecto
 
 ### Variables de Entorno del Backend
 
-El backend requiere las siguientes variables de entorno (En el Root del backend estó, dentro de la carpeta backend):
+El backend requiere las siguientes variables de entorno:
 
 ```env
 # Database Configuration
@@ -225,6 +232,7 @@ Este proyecto está bajo la Licencia ISC.
 **OpenWeather**
 - Falta implementar clima en eventos del calendario principal, hay solo en el listado del Sidebar
 - Mover consumo de api OpenWeather a backend para mas seguridad y poder implementar un cache asi consumirla menos
+- Por ahora la ubicación para consultar la api se la deje hardcodeada porque dinamica estaba fallando (seguro era porque estoy guardando la ubicacion con / en vez de , o algo por el estilo)
 
 **Testing**
 - Aumentar coverage de backend a >80%
