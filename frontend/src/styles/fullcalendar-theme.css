@@ -1,0 +1,377 @@
+/**
+ * Integración de FullCalendar con NaiveUI
+ * Usa variables CSS de NaiveUI para consistencia temática
+ */
+
+/* ===== VARIABLES BASE ===== */
+:root {
+  /* Colores primarios de NaiveUI */
+  --fc-primary-color: #18a058;
+  --fc-primary-hover: #36ad6a;
+  --fc-primary-pressed: #0c7a43;
+  
+  /* Colores de superficie */
+  --fc-body-bg: #fafafc;
+  --fc-card-bg: #ffffff;
+  --fc-border-color: #efeff5;
+  --fc-hover-bg: rgba(24, 160, 88, 0.05);
+  
+  /* Tipografía */
+  --fc-text-primary: #1f2328;
+  --fc-text-secondary: #606266;
+  --fc-text-disabled: #c2c2c2;
+  
+  /* Sombras */
+  --fc-shadow-light: 0 1px 2px -2px rgba(0, 0, 0, 0.08), 
+                     0 3px 6px 0 rgba(0, 0, 0, 0.06), 
+                     0 5px 12px 4px rgba(0, 0, 0, 0.04);
+  
+  /* Radios de borde */
+  --fc-border-radius: 6px;
+  --fc-border-radius-small: 3px;
+}
+
+/* ===== TEMA OSCURO ===== */
+[data-theme="dark"] {
+  --fc-primary-color: #63e2b7;
+  --fc-primary-hover: #7fe7c4;
+  --fc-primary-pressed: #5acea7;
+  
+  --fc-body-bg: #101014;
+  --fc-card-bg: #18181c;
+  --fc-border-color: #262628;
+  --fc-hover-bg: rgba(99, 226, 183, 0.09);
+  
+  --fc-text-primary: #ffffffd1;
+  --fc-text-secondary: #ffffff9c;
+  --fc-text-disabled: #ffffff38;
+  
+  --fc-shadow-light: 0 1px 2px -2px rgba(0, 0, 0, 0.24), 
+                     0 3px 6px 0 rgba(0, 0, 0, 0.18), 
+                     0 5px 12px 4px rgba(0, 0, 0, 0.12);
+}
+
+/* ===== CONTENEDOR PRINCIPAL ===== */
+.fc {
+  height: 100% !important;
+  font-family: v-sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 14px;
+  background-color: var(--fc-card-bg);
+  border-radius: var(--fc-border-radius);
+  overflow: hidden;
+  box-shadow: var(--fc-shadow-light);
+}
+
+/* ===== ENCABEZADOS Y BORDES ===== */
+.fc-theme-standard {
+  border-color: var(--fc-border-color);
+}
+
+.fc-theme-standard td,
+.fc-theme-standard th {
+  border-color: var(--fc-border-color);
+}
+
+.fc-scrollgrid {
+  border-radius: var(--fc-border-radius);
+  overflow: hidden;
+  border-color: var(--fc-border-color);
+}
+
+/* ===== ENCABEZADO DE COLUMNAS ===== */
+.fc-col-header {
+  background-color: var(--fc-body-bg);
+  border-bottom: 2px solid var(--fc-border-color);
+}
+
+.fc-col-header-cell {
+  background-color: var(--fc-body-bg);
+  color: var(--fc-text-secondary);
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 12px 8px;
+  position: relative;
+}
+
+.fc-col-header-cell-cushion {
+  color: var(--fc-text-secondary);
+  text-decoration: none;
+  display: block;
+}
+
+/* ===== CELDAS DE DÍA ===== */
+.fc-daygrid-day {
+  background-color: var(--fc-card-bg);
+  transition: background-color 0.2s ease;
+}
+
+.fc-daygrid-day:hover {
+  background-color: var(--fc-hover-bg);
+}
+
+.fc-daygrid-day-top {
+  padding: 8px;
+}
+
+.fc-daygrid-day-number {
+  color: var(--fc-text-primary);
+  font-weight: 500;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.fc-day-today {
+  background-color: var(--fc-hover-bg) !important;
+}
+
+.fc-day-today .fc-daygrid-day-number {
+  background-color: var(--fc-primary-color);
+  color: white;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+/* ===== VISTA DE TIEMPO ===== */
+.fc-timegrid-axis {
+  background-color: var(--fc-body-bg);
+}
+
+.fc-timegrid-slot {
+  height: 60px !important;
+  border-color: var(--fc-border-color);
+}
+
+.fc-timegrid-slot-minor {
+  border-top-style: dotted;
+  border-top-width: 1px;
+}
+
+.fc-timegrid-slot-label {
+  color: var(--fc-text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 8px;
+}
+
+.fc-timegrid-slot-label-cushion {
+  color: var(--fc-text-secondary);
+}
+
+/* ===== EVENTOS ===== */
+.fc-event {
+  border: none !important;
+  border-radius: var(--fc-border-radius-small) !important;
+  padding: 4px 6px !important;
+  margin: 1px !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.2s ease;
+  font-weight: 500;
+  overflow: hidden;
+}
+
+.fc-event:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.fc-event-title {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 1.3;
+  color: white;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fc-event-time {
+  font-size: 11px;
+  font-weight: 600;
+  opacity: 0.9;
+  margin-bottom: 2px;
+}
+
+/* ===== EVENTOS EN VISTA DE DÍA/SEMANA ===== */
+.fc-timegrid-event {
+  border-radius: var(--fc-border-radius-small) !important;
+  padding: 4px 6px !important;
+}
+
+.fc-timegrid-event .fc-event-main {
+  padding: 0;
+}
+
+.fc-timegrid-event .fc-event-title {
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+/* ===== EVENTOS EN VISTA DE MES ===== */
+.fc-daygrid-event {
+  border-radius: var(--fc-border-radius-small) !important;
+  padding: 2px 6px !important;
+  margin: 1px 2px !important;
+}
+
+.fc-daygrid-event .fc-event-title {
+  font-size: 12px;
+}
+
+/* ===== INDICADORES ESPECIALES ===== */
+.fc-now-indicator {
+  border-top: 2px solid #f56565 !important;
+  position: relative;
+  z-index: 5;
+}
+
+.fc-now-indicator::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: -4px;
+  width: 8px;
+  height: 8px;
+  background-color: #f56565;
+  border-radius: 50%;
+  border: 2px solid var(--fc-card-bg);
+}
+
+/* ===== HORARIO DE TRABAJO ===== */
+.fc-non-business {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="dark"] .fc-non-business {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.fc-business-hours {
+  background-color: transparent;
+}
+
+/* ===== SCROLLBARS PERSONALIZADOS ===== */
+.fc-scroller {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+}
+
+.fc-scroller::-webkit-scrollbar {
+  width: 6px;
+}
+
+.fc-scroller::-webkit-scrollbar-track {
+  background: var(--fc-body-bg);
+  border-radius: 3px;
+}
+
+.fc-scroller::-webkit-scrollbar-thumb {
+  background: var(--fc-border-color);
+  border-radius: 3px;
+  transition: background-color 0.2s ease;
+}
+
+.fc-scroller::-webkit-scrollbar-thumb:hover {
+  background: var(--fc-text-disabled);
+}
+
+/* ===== BOTONES DE FULLCALENDAR (si se usan) ===== */
+.fc-button {
+  background-color: var(--fc-primary-color) !important;
+  border-color: var(--fc-primary-color) !important;
+  color: white !important;
+  border-radius: var(--fc-border-radius-small) !important;
+  font-weight: 500 !important;
+  padding: 6px 12px !important;
+  font-size: 13px !important;
+  transition: all 0.2s ease !important;
+}
+
+.fc-button:hover {
+  background-color: var(--fc-primary-hover) !important;
+  border-color: var(--fc-primary-hover) !important;
+  transform: translateY(-1px);
+}
+
+.fc-button:active,
+.fc-button-active {
+  background-color: var(--fc-primary-pressed) !important;
+  border-color: var(--fc-primary-pressed) !important;
+}
+
+.fc-button:disabled {
+  background-color: var(--fc-text-disabled) !important;
+  border-color: var(--fc-text-disabled) !important;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  .fc-timegrid-slot {
+    height: 50px !important;
+  }
+  
+  .fc-timegrid-slot-label {
+    font-size: 12px;
+    padding: 4px 6px;
+  }
+  
+  .fc-event-title {
+    font-size: 11px;
+  }
+  
+  .fc-col-header-cell {
+    padding: 8px 4px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fc-timegrid-slot {
+    height: 45px !important;
+  }
+  
+  .fc-event {
+    padding: 2px 4px !important;
+  }
+  
+  .fc-event-title {
+    font-size: 10px;
+  }
+}
+
+/* ===== TRANSICIONES SUAVES ===== */
+.fc-event,
+.fc-daygrid-day,
+.fc-button {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== ACCESIBILIDAD ===== */
+.fc-event:focus {
+  outline: 2px solid var(--fc-primary-color);
+  outline-offset: 2px;
+  z-index: 15;
+}
+
+.fc-daygrid-day:focus-within {
+  outline: 1px solid var(--fc-primary-color);
+  outline-offset: -1px;
+}
+
+/* ===== MEJORAS DE CONTRASTE ===== */
+[data-theme="dark"] .fc-event-title {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="light"] .fc-event-title {
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+} 
