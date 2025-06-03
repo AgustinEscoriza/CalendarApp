@@ -6,7 +6,8 @@
 // ===== CONSTANTES =====
 export const DATE_FORMATS = {
   DISPLAY_DATE: 'es-ES',
-  TIME_12H: { hour: '2-digit', minute: '2-digit', hour12: false },
+  TIME_24H: { hour: '2-digit', minute: '2-digit', hour12: false },
+  TIME_12H: { hour: '2-digit', minute: '2-digit', hour12: true },
   DATE_LONG: { day: 'numeric', month: 'long', year: 'numeric' },
   DATE_SHORT: { day: 'numeric', month: 'short' },
   MONTH_YEAR: { month: 'long', year: 'numeric' },
@@ -112,26 +113,29 @@ export const formatMonthYear = (input) => {
 }
 
 /**
- * Formatea hora para mostrar (ej: "14:30")
+ * Formatea hora para mostrar respetando la configuración del usuario
  * @param {Date|string|number} input 
+ * @param {string} timeFormat - '12h' o '24h'
  * @returns {string}
  */
-export const formatTime = (input) => {
+export const formatTime = (input, timeFormat = '24h') => {
   const date = toDate(input)
   if (!date) return 'Hora inválida'
   
-  return date.toLocaleTimeString(DATE_FORMATS.DISPLAY_DATE, DATE_FORMATS.TIME_12H)
+  const format = timeFormat === '12h' ? DATE_FORMATS.TIME_12H : DATE_FORMATS.TIME_24H
+  return date.toLocaleTimeString(DATE_FORMATS.DISPLAY_DATE, format)
 }
 
 /**
- * Formatea rango de tiempo (ej: "14:30 - 16:00")
+ * Formatea rango de tiempo respetando la configuración del usuario
  * @param {Date|string|number} start 
  * @param {Date|string|number} end 
+ * @param {string} timeFormat - '12h' o '24h'
  * @returns {string}
  */
-export const formatTimeRange = (start, end) => {
-  const startTime = formatTime(start)
-  const endTime = formatTime(end)
+export const formatTimeRange = (start, end, timeFormat = '24h') => {
+  const startTime = formatTime(start, timeFormat)
+  const endTime = formatTime(end, timeFormat)
   
   if (startTime === 'Hora inválida' || endTime === 'Hora inválida') {
     return startTime
