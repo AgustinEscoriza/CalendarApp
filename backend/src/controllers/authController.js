@@ -143,7 +143,7 @@ const refreshToken = async (req, res) => {
     res.json(tokens);
   } catch (error) {
     console.error('Error in refresh token:', error);
-    if (error.name === 'JsonWebTokenError') {
+    if (error.name === 'JsonWebTokenError' || error.name === 'TokenExpiredError') {
       return res.status(401).json({ message: req.t('error.invalid_refresh_token') });
     }
     res.status(500).json({ 
