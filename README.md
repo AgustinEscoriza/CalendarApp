@@ -5,7 +5,6 @@ Una aplicación de calendario moderna construida con Vue.js 3 en el frontend y N
 ## 📋 Documentación
 
 - **[Manual de Usuario](USER_MANUAL.md)** - Guía completa para usar la aplicación
-- **[Guía para Desarrolladores](RUN_PROJECT_GUIDE.md)** - Configuración e instalación del proyecto
 
 ---
 
