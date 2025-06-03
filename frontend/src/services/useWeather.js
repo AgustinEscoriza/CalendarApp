@@ -1,7 +1,7 @@
 import { ref, computed } from 'vue'
 import { useSettingsStore } from '../store/settings'
 
-const OPENWEATHER_API_KEY = 'TU_API_KEY_AQUI' // Obtener de https://home.openweathermap.org/api_keys
+const OPENWEATHER_API_KEY = '41815aa32cbd93058ef22cfc8bfd1d7a' // Obtener de https://home.openweathermap.org/api_keys
 const BASE_URL = 'https://api.openweathermap.org/data/2.5'
 
 export const useWeather = () => {
@@ -12,16 +12,19 @@ export const useWeather = () => {
 
   // Parsear ubicación desde el formato de settings "Buenos Aires, Argentina" 
   const parseLocation = (locationString) => {
-    if (!locationString) return 'Mar del Plata,AR' // valor por defecto
+    // Hardcodear por ahora
+    return 'Mar del Plata,AR'
     
-    // Si tiene formato "Ciudad, País"
+    /* Código original comentado para después:
+    if (!locationString) return 'Mar del Plata,AR'
+    
     const parts = locationString.split(',').map(part => part.trim())
     if (parts.length >= 2) {
       return `${parts[0]},${parts[1]}`
     }
     
-    // Si solo tiene ciudad, asumir Argentina para el demo
     return `${parts[0]},AR`
+    */
   }
 
   const getCurrentWeather = async (customLocation = null) => {
