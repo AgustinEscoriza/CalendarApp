@@ -4,6 +4,7 @@ import { useAuthStore } from '../store/auth'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { NForm, NFormItem, NInput, NButton, NCard, NSelect, useMessage } from 'naive-ui'
+import { useSettingsStore } from '../store/settings'
 
 const email = ref('')
 const password = ref('')
@@ -11,10 +12,12 @@ const auth = useAuthStore()
 const { t, locale } = useI18n()
 const router = useRouter()
 const message = useMessage()
+const settingsStore = useSettingsStore()
 
 const onSubmit = async () => {
   await auth.login(email.value, password.value)
   if (auth.accessToken && !auth.error) {
+    await settingsStore.fetchSettings()
     message.success(t('login.success'))
     router.push('/')
   }
