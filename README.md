@@ -119,7 +119,7 @@ El frontend estará ejecutándose en `http://localhost:5173` (puerto por defecto
 
 ### Variables de Entorno del Backend
 
-El backend requiere las siguientes variables de entorno:
+El backend requiere las siguientes variables de entorno (En el Root del backend estó, dentro de la carpeta backend):
 
 ```env
 # Database Configuration
@@ -211,3 +211,30 @@ CalendarApp/
 ## 📝 Licencia
 
 Este proyecto está bajo la Licencia ISC.
+
+
+## 📋 TO DO LIST / Mejoras Pendientes 
+
+**Base de Datos**
+- Seeds para datos de prueba
+
+**Seguridad**
+- Rate limiting en las APIs
+- Salting para los tokens
+
+**OpenWeather**
+- Falta implementar clima en eventos del calendario principal, hay solo en el listado del Sidebar
+- Mover consumo de api OpenWeather a backend para mas seguridad y poder implementar un cache asi consumirla menos
+
+**Testing**
+- Aumentar coverage de backend a >80%
+- Implementar tests E2E básicos
+- Tests de integración para APIs críticas
+
+**Estilos**
+- No es tanto un TO DO pero me aleje un poco del diseño del figma porque no llegaba y tambien no sabia muy bien como manejar el sidebar de fondo negro en el modo Light
+
+
+**Vue.js**
+- Implementar un Store de Eventos para usar enlas dos vistas de calendar
+- Me quedaron cosas inconsistentes en los archivos de calendar, hay que hacer un refactor para reducir un poco la duplicidad de codigo, hay cosas de css y tambien de formateo de fechas
