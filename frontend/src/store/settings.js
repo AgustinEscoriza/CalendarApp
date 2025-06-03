@@ -35,7 +35,8 @@ export const useSettingsStore = defineStore('settings', {
       this.loading = true;
       this.error = null;
       try {
-        const settings = await getSettings();
+        const response = await getSettings();
+        const settings = response.data; // Extraer los datos de la respuesta
         if (settings && settings.length > 0) {
           this.settings = settings[0];
           // Guardar idioma en localStorage
@@ -56,7 +57,8 @@ export const useSettingsStore = defineStore('settings', {
       this.loading = true;
       this.error = null;
       try {
-        const newSettings = await createSetting(settingsData);
+        const response = await createSetting(settingsData);
+        const newSettings = response.data; // Extraer los datos
         this.settings = newSettings;
         // Guardar idioma en localStorage
         localStorage.setItem('user-language', newSettings.language);
@@ -75,7 +77,8 @@ export const useSettingsStore = defineStore('settings', {
       this.error = null;
       try {
         if (this.settings?.id) {
-          const updatedSettings = await updateSetting(this.settings.id, settingsData);
+          const response = await updateSetting(this.settings.id, settingsData);
+          const updatedSettings = response.data; // Extraer los datos
           this.settings = updatedSettings;
         } else {
           await this.createUserSettings(settingsData);
