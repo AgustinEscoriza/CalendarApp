@@ -1,0 +1,32 @@
+/**
+ * Clases utilitarias reutilizables
+ * Spacing, layout, responsive
+ */
+
+/* === ESPACIADO === */
+.p-xs { padding: var(--spacing-xs); }
+.p-sm { padding: var(--spacing-sm); }
+.p-md { padding: var(--spacing-md); }
+.p-lg { padding: var(--spacing-lg); }
+
+.m-xs { margin: var(--spacing-xs); }
+.m-sm { margin: var(--spacing-sm); }
+.m-md { margin: var(--spacing-md); }
+.m-lg { margin: var(--spacing-lg); }
+
+/* === LAYOUT === */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.gap-sm { gap: var(--spacing-sm); }
+.gap-md { gap: var(--spacing-md); }
+
+/* === RESPONSIVE === */
+.mobile-hidden { display: block; }
+.mobile-only { display: none; }
+
+@media (max-width: 768px) {
+  .mobile-hidden { display: none; }
+  .mobile-only { display: block; }
+} 

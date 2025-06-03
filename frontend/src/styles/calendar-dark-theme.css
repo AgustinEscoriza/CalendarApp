@@ -1,0 +1,109 @@
+/**
+ * Tema oscuro para el calendario
+ * FullCalendar + componentes personalizados
+ */
+
+/* === LAYOUT PRINCIPAL === */
+.calendar-layout.dark-theme {
+  background-color: #101014;
+  color: #ffffffd1;
+}
+
+.calendar-layout.dark-theme .calendar-header {
+  background: #18181c;
+  border-bottom-color: #262628;
+}
+
+.calendar-layout.dark-theme .calendar-sidebar {
+  background: #18181c;
+  border-right-color: #262628;
+}
+
+.calendar-layout.dark-theme .calendar-content {
+  background: #18181c;
+}
+
+/* === FULLCALENDAR MODO OSCURO === */
+.calendar-layout.dark-theme :deep(.fc) {
+  background-color: #18181c;
+  color: #ffffffd1;
+}
+
+.calendar-layout.dark-theme :deep(.fc-theme-standard td),
+.calendar-layout.dark-theme :deep(.fc-theme-standard th) {
+  border-color: #262628;
+}
+
+.calendar-layout.dark-theme :deep(.fc-col-header) {
+  background-color: #101014;
+  border-bottom-color: #262628;
+}
+
+.calendar-layout.dark-theme :deep(.fc-col-header-cell) {
+  background-color: #101014;
+  color: #ffffff9c;
+}
+
+.calendar-layout.dark-theme :deep(.fc-daygrid-day) {
+  background-color: #18181c;
+}
+
+.calendar-layout.dark-theme :deep(.fc-day-today) {
+  background-color: var(--app-green-light) !important;
+}
+
+.calendar-layout.dark-theme :deep(.fc-daygrid-day-number) {
+  color: #ffffffd1;
+}
+
+.calendar-layout.dark-theme :deep(.fc-timegrid-axis) {
+  background-color: #101014;
+}
+
+.calendar-layout.dark-theme :deep(.fc-timegrid-slot) {
+  border-color: #262628;
+}
+
+.calendar-layout.dark-theme :deep(.fc-timegrid-slot-label) {
+  color: #ffffff9c;
+}
+
+.calendar-layout.dark-theme :deep(.fc-now-indicator) {
+  border-top-color: var(--app-green) !important;
+}
+
+.calendar-layout.dark-theme :deep(.fc-now-indicator::before) {
+  background-color: var(--app-green);
+  border-color: #18181c;
+}
+
+/* === EVENTOS EN MODO OSCURO === */
+.calendar-layout.dark-theme :deep(.fc-event) {
+  background-color: var(--app-green) !important;
+  border-color: var(--app-green) !important;
+  color: #101014 !important;
+}
+
+.calendar-layout.dark-theme :deep(.fc-event:hover) {
+  background-color: var(--app-green-hover) !important;
+  border-color: var(--app-green-hover) !important;
+}
+
+.calendar-layout.dark-theme :deep(.fc-daygrid-event .fc-event-title),
+.calendar-layout.dark-theme :deep(.fc-timegrid-event .fc-event-title) {
+  color: #101014 !important;
+  text-shadow: none;
+}
+
+/* === SCROLLBARS MODO OSCURO === */
+.calendar-layout.dark-theme :deep(.fc-scroller::-webkit-scrollbar-track) {
+  background: #101014;
+}
+
+.calendar-layout.dark-theme :deep(.fc-scroller::-webkit-scrollbar-thumb) {
+  background: #262628;
+}
+
+.calendar-layout.dark-theme :deep(.fc-scroller::-webkit-scrollbar-thumb:hover) {
+  background: #ffffff38;
+} 

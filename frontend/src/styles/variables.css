@@ -1,0 +1,57 @@
+/**
+ * Variables globales del sistema de diseño
+ * Colores, espaciado y valores reutilizables
+ */
+
+:root {
+  /* === COLORES PRIMARIOS === */
+  --app-green: #63e2b7;
+  --app-green-hover: #7fe7c4;
+  --app-green-dark: #52c3a1;
+  --app-green-light: rgba(99, 226, 183, 0.09);
+  
+  /* === ESPACIADO === */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 24px;
+  
+  /* === BORDES Y RADIOS === */
+  --border-radius-sm: 3px;
+  --border-radius: 6px;
+  --border-radius-lg: 8px;
+  
+  /* === SOMBRAS === */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  
+  /* === TRANSICIONES === */
+  --transition-fast: 0.2s ease;
+  --transition-smooth: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* === FUENTES === */
+  --font-family-system: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-size-xs: 11px;
+  --font-size-sm: 12px;
+  --font-size-md: 13px;
+  --font-size-lg: 14px;
+  --font-size-xl: 15px;
+  
+  /* === LAYOUT === */
+  --sidebar-width: 280px;
+  --header-height: 60px;
+  --mini-calendar-height: 320px;
+}
+
+/* === TEMA OSCURO === */
+[data-theme="dark"] {
+  --app-green-light: rgba(99, 226, 183, 0.09);
+}
+
+/* === CLASES UTILITARIAS === */
+.transition-smooth { transition: var(--transition-smooth); }
+.shadow-sm { box-shadow: var(--shadow-sm); }
+.shadow-md { box-shadow: var(--shadow-md); }
+.font-system { font-family: var(--font-family-system); } 

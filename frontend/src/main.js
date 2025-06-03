@@ -4,6 +4,7 @@ import router from './router'
 import i18n from './i18n'
 import naive from './plugins/naive-ui'
 import './style.css'
+import './styles/variables.css'
 import './styles/fullcalendar-theme.css'
 import App from './App.vue'
 

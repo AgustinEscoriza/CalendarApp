@@ -1,0 +1,182 @@
+/**
+ * Estilos del Sidebar del Calendario
+ * Incluye mini calendario y lista de eventos
+ */
+
+.calendar-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  height: 100%;
+  overflow: hidden;
+  min-height: 0;
+  padding-bottom: var(--spacing-sm);
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 0;
+}
+
+/* Headers del mini calendario */
+.mini-calendar-card {
+  flex-shrink: 0;
+}
+
+.mini-calendar-container {
+  padding: var(--spacing-xs);
+  padding-left: 0;
+}
+
+.day-header {
+  text-align: center;
+  padding: 2px;
+}
+
+/* Botones de días del calendario */
+.calendar-day-btn {
+  position: relative;
+}
+
+.calendar-day-btn.other-month {
+  opacity: 0.4;
+}
+
+.event-indicator {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 6px;
+  height: 6px;
+  background-color: var(--app-green);
+  border-radius: 50%;
+  border: 1px solid white;
+}
+
+/* Card de eventos */
+.events-card {
+  flex: 1;
+  min-height: 0;
+  max-height: calc(100vh - var(--mini-calendar-height));
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Scroll container para eventos */
+.events-scroll-container {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--spacing-lg);
+  padding-bottom: var(--spacing-xl);
+  margin: calc(-1 * var(--spacing-lg));
+  margin-left: calc(-1 * var(--spacing-lg));
+  margin-bottom: calc(-1 * var(--spacing-sm));
+  padding-right: var(--spacing-sm);
+}
+
+.events-scroll-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.events-scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.events-scroll-container::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: var(--border-radius-sm);
+}
+
+.events-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* Eventos */
+.event-card {
+  transition: var(--transition-fast);
+}
+
+.event-card:hover {
+  transform: translateX(2px);
+}
+
+/* Grupos de eventos por día */
+.day-group {
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.day-group:last-child {
+  border-bottom: none;
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-sm);
+}
+
+.day-header-section {
+  margin-bottom: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius);
+  border-left: 3px solid var(--app-green);
+  box-shadow: var(--shadow-sm);
+}
+
+.day-label {
+  font-size: var(--font-size-md) !important;
+  font-weight: 600 !important;
+  color: var(--app-green) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  font-family: var(--font-family-system) !important;
+}
+
+/* Eventos clickeables */
+.clickable-event {
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.clickable-event:hover {
+  transform: translateX(4px);
+  box-shadow: var(--shadow-md);
+}
+
+.clickable-event:active {
+  transform: translateX(2px);
+}
+
+/* Header de eventos */
+.events-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-xs) 0;
+}
+
+.events-icon {
+  color: var(--app-green);
+  font-size: 18px;
+}
+
+.events-title {
+  font-size: var(--font-size-xl) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.025em !important;
+  font-family: var(--font-family-system) !important;
+}
+
+/* Responsive */
+@media (max-height: 800px) {
+  .calendar-sidebar {
+    gap: var(--spacing-sm);
+  }
+  
+  .mini-calendar-card {
+    flex-shrink: 1;
+  }
+} 

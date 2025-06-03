@@ -1,0 +1,45 @@
+/**
+ * Estilos para eventos de FullCalendar
+ * Colores, hovers y estados
+ */
+
+/* === EVENTOS EN VISTA MENSUAL === */
+:deep(.fc-daygrid-event) {
+  background-color: var(--app-green) !important;
+  border-color: var(--app-green) !important;
+  color: #101014 !important;
+}
+
+:deep(.fc-daygrid-event .fc-event-title) {
+  color: #101014 !important;
+  font-weight: 500 !important;
+  text-shadow: none;
+}
+
+:deep(.fc-daygrid-event .fc-event-time) {
+  color: #101014 !important;
+  opacity: 0.8;
+}
+
+/* === EVENTOS EN VISTA DE TIEMPO === */
+:deep(.fc-timegrid-event) {
+  background-color: var(--app-green) !important;
+  border-color: var(--app-green) !important;
+  color: #101014 !important;
+}
+
+:deep(.fc-timegrid-event .fc-event-title) {
+  color: #101014 !important;
+  font-weight: 500 !important;
+}
+
+/* === HOVER STATES === */
+:deep(.fc-event:hover) {
+  background-color: var(--app-green-hover) !important;
+  border-color: var(--app-green-hover) !important;
+}
+
+/* === CONTRASTE EN TEMA OSCURO === */
+[data-theme="dark"] :deep(.fc-daygrid-event .fc-event-title) {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+} 

@@ -103,6 +103,7 @@
 </template>
 
 <script setup>
+import '../../styles/calendar-sidebar.css'
 import { ref, computed, watch } from 'vue'
 import { ChevronBack, ChevronForward, Time, Calendar } from '@vicons/ionicons5'
 import { useThemeVars } from 'naive-ui'
@@ -125,10 +126,6 @@ const currentDate = ref(new Date())
 
 // Agregar las variables de tema
 const themeVars = useThemeVars()
-
-// Definir el mismo color verde consistente
-const APP_GREEN = '#63e2b7'
-const APP_GREEN_HOVER = '#7fe7c4'
 
 // Headers de días dinámicos - comenzando en lunes
 const dayHeaders = computed(() => {
@@ -318,81 +315,27 @@ const selectEvent = (event) => {
 </script>
 
 <style scoped>
-.calendar-sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  height: 100%;
-  overflow: hidden;
-  min-height: 0;
-  padding-bottom: 8px; /* Espacio en la parte inferior */
-}
-
-.calendar-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-left: 0;
-}
-
-/* Remover los estilos hardcodeados y usar variables de tema */
+/* Estilos específicos del tema que necesitan v-bind */
 .calendar-header :deep(.n-text) {
   font-size: 1rem !important;
   font-weight: 600 !important;
   color: v-bind('themeVars.textColor1') !important;
   letter-spacing: 0.02em !important;
   text-transform: capitalize !important;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+  font-family: var(--font-family-system) !important;
 }
 
-.mini-calendar-card {
-  flex-shrink: 0;
-}
-
-.mini-calendar-card :deep(.n-card__content) {
-  padding-left: 0 !important;
-}
-
+.mini-calendar-card :deep(.n-card__content),
 .mini-calendar-card :deep(.n-card__header) {
   padding-left: 0 !important;
 }
 
-.mini-calendar-container {
-  padding: 4px;
-  padding-left: 0;
+.day-header-section {
+  background: v-bind('themeVars.cardColor');
 }
 
-.day-header {
-  text-align: center;
-  padding: 2px;
-}
-
-.calendar-day-btn {
-  position: relative;
-}
-
-.calendar-day-btn.other-month {
-  opacity: 0.4;
-}
-
-.event-indicator {
-  position: absolute;
-  bottom: 2px;
-  right: 2px;
-  width: 6px;
-  height: 6px;
-  background-color: v-bind('APP_GREEN');
-  border-radius: 50%;
-  border: 1px solid white;
-}
-
-.events-card {
-  flex: 1;
-  min-height: 0;
-  max-height: calc(100vh - 320px); /* Limitar altura máxima */
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+.events-title {
+  color: v-bind('themeVars.textColor1') !important;
 }
 
 .events-card :deep(.n-card__content) {
@@ -407,6 +350,8 @@ const selectEvent = (event) => {
 .events-card :deep(.n-card__header) {
   padding-left: 0 !important;
   flex-shrink: 0;
+  background: linear-gradient(135deg, v-bind('themeVars.cardColor') 0%, v-bind('themeVars.bodyColor') 100%);
+  border-bottom: 1px solid v-bind('themeVars.borderColor');
 }
 
 .events-card :deep(.n-scrollbar) {
@@ -422,145 +367,20 @@ const selectEvent = (event) => {
 }
 
 .events-card :deep(.n-scrollbar-content) {
-  padding: 16px;
-}
-
-.upcoming-events-card {
-  flex: 1;
-  min-height: 0;
-}
-
-.events-scroll-container {
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 16px;
-  padding-bottom: 24px;
-  margin: -16px;
-  margin-left: -16px;
-  margin-bottom: -8px;
-  padding-right: 8px;
-}
-
-.events-scroll-container::-webkit-scrollbar {
-  width: 6px;
-}
-
-.events-scroll-container::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.events-scroll-container::-webkit-scrollbar-thumb {
-  background: #d1d5db;
-  border-radius: 3px;
-}
-
-.events-scroll-container::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
-}
-
-.event-card {
-  transition: transform 0.2s ease;
-}
-
-.event-card:hover {
-  transform: translateX(2px);
+  padding: var(--spacing-lg);
 }
 
 .event-card :deep(.n-card__content) {
-  padding-left: 12px !important;
-}
-
-/* Responsive adjustments */
-@media (max-height: 800px) {
-  .calendar-sidebar {
-    gap: 8px;
-  }
-  
-  .mini-calendar-card {
-    flex-shrink: 1;
-  }
-}
-
-.day-group {
-  border-bottom: 1px solid #f0f0f0;
-  padding-bottom: 16px;
-  margin-bottom: 16px;
-}
-
-.day-group:last-child {
-  border-bottom: none;
-  margin-bottom: 16px; /* Mantener margen en el último elemento */
-  padding-bottom: 8px; /* Menos padding en el último */
-}
-
-.day-header-section {
-  margin-bottom: 12px;
-  padding: 8px 12px;
-  background: v-bind('themeVars.cardColor');
-  border-radius: 6px;
-  border-left: 3px solid v-bind('APP_GREEN');
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-.day-label {
-  font-size: 13px !important;
-  font-weight: 600 !important;
-  color: v-bind('APP_GREEN') !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.5px !important;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
-}
-
-.clickable-event {
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.clickable-event:hover {
-  transform: translateX(4px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.clickable-event:active {
-  transform: translateX(2px);
-}
-
-.events-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 4px 0;
-}
-
-.events-icon {
-  color: v-bind('APP_GREEN');
-  font-size: 18px;
-}
-
-.events-title {
-  font-size: 15px !important;
-  font-weight: 600 !important;
-  color: v-bind('themeVars.textColor1') !important;
-  letter-spacing: 0.025em !important;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
-}
-
-/* Opcional: agregar un gradiente sutil al header */
-.events-card :deep(.n-card__header) {
-  background: linear-gradient(135deg, v-bind('themeVars.cardColor') 0%, v-bind('themeVars.bodyColor') 100%);
-  border-bottom: 1px solid v-bind('themeVars.borderColor');
-  padding-left: 0 !important;
+  padding-left: var(--spacing-md) !important;
 }
 
 /* Botones del calendario mini */
 :deep(.n-button--primary-type) {
-  --n-color: v-bind('APP_GREEN') !important;
-  --n-color-hover: v-bind('APP_GREEN_HOVER') !important;
-  --n-color-pressed: v-bind('APP_GREEN') !important;
-  --n-border: 1px solid v-bind('APP_GREEN') !important;
-  --n-border-hover: 1px solid v-bind('APP_GREEN_HOVER') !important;
-  --n-border-pressed: 1px solid v-bind('APP_GREEN') !important;
+  --n-color: var(--app-green) !important;
+  --n-color-hover: var(--app-green-hover) !important;
+  --n-color-pressed: var(--app-green-dark) !important;
+  --n-border: 1px solid var(--app-green) !important;
+  --n-border-hover: 1px solid var(--app-green-hover) !important;
+  --n-border-pressed: 1px solid var(--app-green-dark) !important;
 }
 </style> 

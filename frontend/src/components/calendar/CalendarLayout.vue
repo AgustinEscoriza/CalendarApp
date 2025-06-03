@@ -116,6 +116,12 @@ import {
   getDefaultEventDates
 } from '../../utils/dateUtils'
 
+// Importar estilos modulares
+import '../../styles/calendar-layout.css'
+import '../../styles/calendar-events.css'
+import '../../styles/calendar-dark-theme.css'
+import '../../styles/utility-classes.css'
+
 const { t, locale } = useI18n()
 const auth = useAuthStore()
 const settingsStore = useSettingsStore()
@@ -480,135 +486,34 @@ watch(
 </script>
 
 <style scoped>
+/* Solo estilos que necesitan v-bind() del tema */
 .calendar-layout {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
   background-color: v-bind('themeVars.bodyColor');
-  overflow: hidden;
 }
 
 .calendar-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.75rem 1.5rem;
   background: v-bind('themeVars.cardColor');
   border-bottom: 1px solid v-bind('themeVars.borderColor');
   box-shadow: v-bind('themeVars.boxShadow1');
-  flex-shrink: 0;
-}
-
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.current-period {
-  margin: 0;
-  font-size: 1.4rem;
-  font-weight: 500;
-  color: v-bind('themeVars.textColor1');
-  letter-spacing: 0.025em;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-}
-
-.calendar-main {
-  flex: 1;
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  overflow: hidden;
-  gap: 0;
-  min-height: 0;
 }
 
 .calendar-sidebar {
-  width: 280px;
   background: v-bind('themeVars.cardColor');
   border-right: 1px solid v-bind('themeVars.borderColor');
-  padding: 0.75rem 0.75rem 0.75rem 0;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-  height: 100%;
 }
 
 .calendar-content {
   background: v-bind('themeVars.cardColor');
-  overflow: hidden;
-  height: 100%;
-  width: 100%;
-  position: relative;
 }
 
-:deep(.fc) {
-  height: 100% !important;
-  width: 100% !important;
+.current-period {
+  color: v-bind('themeVars.textColor1');
 }
 
-:deep(.fc-view-harness) {
-  height: 100% !important;
-}
-
-/* Responsive design usando variables de NaiveUI */
-@media (max-width: 768px) {
-  .calendar-main {
-    grid-template-columns: 1fr;
-    grid-template-rows: 300px 1fr;
-  }
-  
-  .calendar-sidebar {
-    width: 100%;
-    max-height: 300px;
-  }
-  
-  .calendar-header {
-    flex-direction: column;
-    gap: 1rem;
-    text-align: center;
-  }
-  
-  .header-left,
-  .header-right {
-    justify-content: center;
-  }
-}
-
-/* Fix para eventos en vista mensual */
-:deep(.fc-daygrid-event) {
-  background-color: v-bind('APP_GREEN') !important;
-  border-color: v-bind('APP_GREEN') !important;
-  color: #101014 !important;
-}
-
-:deep(.fc-daygrid-event .fc-event-title) {
-  color: #101014 !important;
-  font-weight: 500 !important;
-  text-shadow: none;
-}
-
-:deep(.fc-daygrid-event .fc-event-time) {
-  color: #101014 !important;
-  opacity: 0.8;
-}
-
+:deep(.fc-daygrid-event),
 :deep(.fc-timegrid-event) {
   background-color: v-bind('APP_GREEN') !important;
   border-color: v-bind('APP_GREEN') !important;
-  color: #101014 !important;
-}
-
-:deep(.fc-timegrid-event .fc-event-title) {
-  color: #101014 !important;
-  font-weight: 500 !important;
 }
 
 :deep(.fc-event:hover) {
@@ -616,141 +521,13 @@ watch(
   border-color: v-bind('APP_GREEN_HOVER') !important;
 }
 
-/* Asegurar contraste en tema oscuro */
-[data-theme="dark"] :deep(.fc-daygrid-event .fc-event-title) {
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-}
-
-/* Espaciado */
-.p-xs { padding: var(--spacing-xs); }
-.p-sm { padding: var(--spacing-sm); }
-.p-md { padding: var(--spacing-md); }
-.p-lg { padding: var(--spacing-lg); }
-
-.m-xs { margin: var(--spacing-xs); }
-.m-sm { margin: var(--spacing-sm); }
-.m-md { margin: var(--spacing-md); }
-.m-lg { margin: var(--spacing-lg); }
-
-/* Layout */
-.flex { display: flex; }
-.flex-col { flex-direction: column; }
-.items-center { align-items: center; }
-.justify-between { justify-content: space-between; }
-.gap-sm { gap: var(--spacing-sm); }
-.gap-md { gap: var(--spacing-md); }
-
-/* Responsive */
-.mobile-hidden { display: block; }
-.mobile-only { display: none; }
-
-@media (max-width: 768px) {
-  .mobile-hidden { display: none; }
-  .mobile-only { display: block; }
-}
-
-/* Tema oscuro para el calendario */
-.calendar-layout.dark-theme {
-  background-color: #101014;
-  color: #ffffffd1;
-}
-
-.calendar-layout.dark-theme .calendar-header {
-  background: #18181c;
-  border-bottom-color: #262628;
-}
-
-.calendar-layout.dark-theme .calendar-sidebar {
-  background: #18181c;
-  border-right-color: #262628;
-}
-
-.calendar-layout.dark-theme .calendar-content {
-  background: #18181c;
-}
-
-/* Estilos específicos de FullCalendar en modo oscuro */
-.calendar-layout.dark-theme :deep(.fc) {
-  background-color: #18181c;
-  color: #ffffffd1;
-}
-
-.calendar-layout.dark-theme :deep(.fc-theme-standard td),
-.calendar-layout.dark-theme :deep(.fc-theme-standard th) {
-  border-color: #262628;
-}
-
-.calendar-layout.dark-theme :deep(.fc-col-header) {
-  background-color: #101014;
-  border-bottom-color: #262628;
-}
-
-.calendar-layout.dark-theme :deep(.fc-col-header-cell) {
-  background-color: #101014;
-  color: #ffffff9c;
-}
-
-.calendar-layout.dark-theme :deep(.fc-daygrid-day) {
-  background-color: #18181c;
-}
-
-.calendar-layout.dark-theme :deep(.fc-day-today) {
-  background-color: rgba(99, 226, 183, 0.09) !important;
-}
-
-.calendar-layout.dark-theme :deep(.fc-daygrid-day-number) {
-  color: #ffffffd1;
-}
-
-.calendar-layout.dark-theme :deep(.fc-timegrid-axis) {
-  background-color: #101014;
-}
-
-.calendar-layout.dark-theme :deep(.fc-timegrid-slot) {
-  border-color: #262628;
-}
-
-.calendar-layout.dark-theme :deep(.fc-timegrid-slot-label) {
-  color: #ffffff9c;
-}
-
-.calendar-layout.dark-theme :deep(.fc-now-indicator) {
-  border-top-color: #63e2b7 !important;
-}
-
-.calendar-layout.dark-theme :deep(.fc-now-indicator::before) {
-  background-color: #63e2b7;
-  border-color: #18181c;
-}
-
-/* Eventos en modo oscuro */
 .calendar-layout.dark-theme :deep(.fc-event) {
   background-color: v-bind('APP_GREEN') !important;
   border-color: v-bind('APP_GREEN') !important;
-  color: #101014 !important;
 }
 
 .calendar-layout.dark-theme :deep(.fc-event:hover) {
   background-color: v-bind('APP_GREEN_HOVER') !important;
   border-color: v-bind('APP_GREEN_HOVER') !important;
-}
-
-.calendar-layout.dark-theme :deep(.fc-daygrid-event .fc-event-title),
-.calendar-layout.dark-theme :deep(.fc-timegrid-event .fc-event-title) {
-  color: #101014 !important;
-  text-shadow: none;
-}
-
-/* Scrollbars en modo oscuro */
-.calendar-layout.dark-theme :deep(.fc-scroller::-webkit-scrollbar-track) {
-  background: #101014;
-}
-
-.calendar-layout.dark-theme :deep(.fc-scroller::-webkit-scrollbar-thumb) {
-  background: #262628;
-}
-
-.calendar-layout.dark-theme :deep(.fc-scroller::-webkit-scrollbar-thumb:hover) {
-  background: #ffffff38;
 }
 </style> 
