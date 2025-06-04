@@ -235,6 +235,7 @@ Este proyecto está bajo la Licencia ISC.
 
 **Testing**
 - Aumentar coverage de backend a >80%
+- Frontend solo llegué a testear las funciones de fechas, falta el resto
 - Implementar tests E2E básicos
 - Tests de integración para APIs críticas
 
